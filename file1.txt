@@ -1,0 +1,9 @@
+Part 1:
+Create a git repository containing a 'hello world' program in python. 
+Part 2 (graded on participation): Solve the following programming problems to the best of your ability. If you don't understand a concept, make a note and include it in your submission comments.
+Part A: Hello World
+Write Hello World.
+Part B: Write a program that reads a text file and outputs the text file with line numbers at the beginning of each line.
+Part C: Write a program that accepts a number N from stdin and prints out the volume of a sphere with radius N meters. 
+Part D: Write a program that uses recursion to compute the factorial of 10. 
+Part E: Write a program that iterates through all numbers <50 and determines if they are prime or not.
