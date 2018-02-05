@@ -1,49 +1,55 @@
 import random
+import time
 
-class waitingRoom:
-    def __init__(self): #here wRoom means patients in waiting room and eRoom means patient in examroom.
-        self.wRoom=20
+import re
 
-class examRoom:
-    def __init__(self):
-        self.eRoom=[]
-        
+#this function was used from the stack overflow to do the sorting.
+_nsre = re.compile('([0-9]+)')
+def natural_sort_key(s):
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split(_nsre, s)]
+
+time.time()
+
+waitingRoom=[]
+
+triageRoom=[]
+
+patients=["bobby","tom","harold","jenny","bruce",\
+          "stephane","george","thomas","bowie","grant",\
+          "kimber","lucas","jonah","joey","monica"]
+
+examRoom=[]
+
+def callNurse():
+    triageRoom.append(waitingRoom.pop(0))
+    triageRoom.sort(key=natural_sort_key)
+
+
 
 class patient:
-    def __init__(self,name):
-        self.name=name
+                
+    def __init__(self):
+        self.triageNumber=random.randrange(1,10)
+        self.name=str(self.triageNumber)+" "+random.choice(patients)+" "+random.choice(patients)
         self.pos="waiting room"
         self.visitTime=random.randrange(15,20)
-        self.triaged=False
-        self.totaltime=0
-        self.visitedDoctor=False
+        waitingRoom.append(self.name)
+        self.time1=int(time.clock())
 
-    def nextStep(self):
-        self.totaltime=self.totaltime+1
 
-    def visit(self):
-        self.visitedDoctor=True
-        
-class nurse:
-    def __init__(self,name):
-        self.name=name
-        
-    def triagePatient(self,pname):
-        pname.triaged=True
-        pname.nextStep()
-            
+    def erEntry(self):
+        self.time1=self.time1+120
+        if len(examRoom)<6:
+            examRoom.append(triageRoom.pop(0))
+        else:
+            print("examRoom is filled")
+
+    def rem(self):
+        while True:
+            if time.clock()==self.time1+self.visitTime:
+                examRoom.remove(self.name)
+                break
 
 
 
-
-
-
-        
-class physician:
-    def __init__(self,name,roomNo):
-        self.name=name
-        self.roomNo=roomNo
-
-##    def currentPatient(self):
-##
-##        
