@@ -1,14 +1,6 @@
 import random
 import time
 
-import re
-
-#this function was used from the stack overflow to do the sorting.
-_nsre = re.compile('([0-9]+)')
-def natural_sort_key(s):
-    return [int(text) if text.isdigit() else text.lower()
-            for text in re.split(_nsre, s)]
-
 time.time()
 
 waitingRoom=[]
@@ -23,33 +15,55 @@ examRoom=[]
 
 def callNurse():
     triageRoom.append(waitingRoom.pop(0))
-    triageRoom.sort(key=natural_sort_key)
-
 
 
 class patient:
                 
     def __init__(self):
-        self.triageNumber=random.randrange(1,10)
-        self.name=str(self.triageNumber)+" "+random.choice(patients)+" "+random.choice(patients)
+        self.name=random.choice(patients)+" "+random.choice(patients)
         self.pos="waiting room"
-        self.visitTime=random.randrange(15,20)
-        waitingRoom.append(self.name)
-        self.time1=int(time.clock())
+        self.visitTime =  int(random.randrange(15,20))
+        
 
+    def __str__(self):
+        return self.name
 
-    def erEntry(self):
-        self.time1=self.time1+120
-        if len(examRoom)<6:
-            examRoom.append(triageRoom.pop(0))
+def simulate():
+
+    minute=1   
+
+    for i in range(20):
+        p = patient()
+        waitingRoom.append(p)
+     
+    while True:
+       
+        if len(waitingRoom) > 0:
+            callNurse()
+            
+        if len(triageRoom)>0:
+            if len(examRoom)<6:
+                try:
+                    examRoom.append(triageRoom.pop(0))
+                except IndexError:
+                    break
+                    
         else:
-            print("examRoom is filled")
+            print("examRoom is filled or empty")
 
-    def rem(self):
-        while True:
-            if time.clock()==self.time1+self.visitTime:
-                examRoom.remove(self.name)
-                break
+        for pat in examRoom:
+            pat.visitTime -=1
+            print(pat.name,pat.visitTime)
+            if pat.visitTime ==0:
+                examRoom.remove(pat)
+        print("minute"+" "+str(minute))
+        print(" ")
 
+        minute=minute+1
 
+        if len(waitingRoom)==0 and len(triageRoom)==0 and len(examRoom)==0:
+           break
+        
 
+       
+simulate()
