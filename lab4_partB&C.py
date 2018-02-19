@@ -24,13 +24,16 @@ def fib_dynamic(n):
         a=k.index(n)
         return v[a]
     else:
-        if n==1 or n==0:
+        if n<=1:
             k.append(n)
-            v.append(1)
-        else:
-            k.append(n)
-            v.append(fib_dynamic(n-1)+fib_dynamic(n-2))
             a=k.index(n)
+            v.append(1)
+            return v[a]
+        else:
+            v.append(fib_dynamic(n-1)+fib_dynamic(n-2))
+            k.append(n)
+            a=k.index(n)
+            return v[a]
 
         
 
