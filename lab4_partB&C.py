@@ -16,25 +16,17 @@ def fibonacci(n):
         
     return y
 
-k=[]
-v=[]
+y=500
+k=[1,1]
+for i in range(y):
+    k.append(0)
 
-def fib_dynamic(n):
-    if n in k:
-        a=k.index(n)
-        return v[a]
-    else:
-        if n<=1:
-            k.append(n)
-            a=k.index(n)
-            v.append(1)
-            return v[a]
-        else:
-            v.append(fib_dynamic(n-1)+fib_dynamic(n-2))
-            k.append(n)
-            a=k.index(n)
-            return v[a]
+def fib_dynamic(x):
+    if k[x]==0:
+        k[x]=fib_dynamic(x-1)+fib_dynamic(x-2)
 
+    return k[x]
+        
         
 
     
